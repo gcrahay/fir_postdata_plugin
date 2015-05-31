@@ -1,5 +1,6 @@
 from json import loads
 from datetime import datetime
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.urlresolvers import resolve
 from django.shortcuts import render, redirect
@@ -19,6 +20,8 @@ def get_external_values(querydict):
 	return formatted
 
 @csrf_exempt
+@login_required
+@user_passes_test(incidents_views.is_incident_handler)
 def postdata_landing(request):
 	if request.POST:
 		form = LandingForm(request.POST)
