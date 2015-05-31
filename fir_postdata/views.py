@@ -60,6 +60,11 @@ def postdata_landing(request):
 						return creation
 				else:
 					form.errors.update(incident_form.errors)
+		elif "raw_data" in form.errors:
+			formatted = get_external_values(request.POST)
+			form = LandingForm(initial={'raw_data':formatted, 'new': True,
+										'date': datetime.now(), 'start_timestamp': datetime.now(),
+										'source':request.META.get('HTTP_REFERER', None)})
 	else:
 		formatted = get_external_values(request.GET)
 		form = LandingForm(initial={'raw_data':formatted, 'new': True,

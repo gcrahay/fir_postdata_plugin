@@ -37,7 +37,6 @@ $(document).ready(function() {
 
 {% endblock %}
 
-{% block header %}<h3>{% trans 'Add external data' %}</h3>{% endblock %}
 
 
 {% block content %}
@@ -51,6 +50,12 @@ $(document).ready(function() {
 </ul>
 {% endif %}
     <form action="{% url 'postdata:landing' %}" method="post" class="form-inline">
+        <div class="row header">
+            <h1 class="col-sm-11">{% trans "Add external data" %}</h1>
+            <div class="col-sm-1">
+                <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
+            </div>
+        </div>
         <div class="row">
             {% csrf_token %}
             <div class="row">
@@ -205,8 +210,8 @@ $(document).ready(function() {
                 </div>
 
             </div></fieldset>
-            <input type="submit" value="Submit" />
         </div>
+        <button class="btn btn-primary" type="submit">{% trans "Save" %}</button>
     </form>
     </div>
 
