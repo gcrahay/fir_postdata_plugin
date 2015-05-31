@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.utils.translation import ugettext_lazy as _
 
 from incidents.models import IncidentForm
 from incidents import views as incidents_views
@@ -31,12 +32,12 @@ def postdata_landing(request):
 					except:
 						result = {'status':'error'}
 					if isinstance(result, dict) and result.get('status', 'error') == 'success':
-						messages.info(request, 'Nugget added to event')
+						messages.info(request, _("Nugget added to event"))
 					else:
-						messages.error(request, "Cannot add nugget to event")
+						messages.error(request, _("Cannot add nugget to event"))
 					return redirect('incidents:details', incident_id=event.id)
 				else:
-					messages.error(request, "You must choose an event or create one")
+					messages.error(request, _("You must select an event or create one"))
 					if 'raw_data' not in request.POST:
 						return redirect('dashboard:main')
 			else:
@@ -52,9 +53,9 @@ def postdata_landing(request):
 						except:
 							result = {'status':'error'}
 						if isinstance(result, dict) and result.get('status', 'error') == 'success':
-							messages.info(request, 'Nugget added to event')
+							messages.info(request, _("Nugget added to event"))
 						else:
-							messages.error(request, "Cannot add nugget to event")
+							messages.error(request, _("Cannot add nugget to event"))
 						return creation
 				else:
 					form.errors.update(incident_form.errors)
