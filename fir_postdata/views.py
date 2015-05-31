@@ -27,7 +27,7 @@ def postdata_landing(request):
 				if event is not None:
 					add_return =  nuggets_views.new(request, event.pk)
 					try:
-						result = loads(add_return)
+						result = loads(add_return.content)
 					except:
 						result = {'status':'error'}
 					if isinstance(result, dict) and result.get('status', 'error') == 'success':
@@ -44,12 +44,11 @@ def postdata_landing(request):
 				if incident_form.is_valid():
 					creation =  incidents_views.new_event(request)
 					redirected = resolve(creation.url)
-					print redirected
 					if redirected.namespace in ['incidents', 'events'] and redirected.url_name == 'details':
 						event_id = redirected.kwargs.get('incident_id')
 						add_return =  nuggets_views.new(request, event_id)
 						try:
-							result = loads(add_return)
+							result = loads(add_return.content)
 						except:
 							result = {'status':'error'}
 						if isinstance(result, dict) and result.get('status', 'error') == 'success':
