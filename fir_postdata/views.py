@@ -1,23 +1,19 @@
 from json import loads
 from datetime import datetime
-from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.core.urlresolvers import resolve
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from incidents.models import IncidentForm
 from incidents import views as incidents_views
 from fir_nuggets import views as nuggets_views
 
 from fir_postdata.forms import LandingForm
+from fir_postdata.utils import get_external_values
 
-def get_external_values(querydict):
-	formatted = u""
-	for k, v in querydict.items():
-		formatted += u"{0}: {1}\n".format(k, v)
-	return formatted
 
 @csrf_exempt
 @login_required
