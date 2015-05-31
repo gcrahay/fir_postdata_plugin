@@ -200,7 +200,6 @@ $(document).ready(function() {
                         <label for="id_raw_data" class="control-label raw_data-label">{% trans "Raw data" %}</label>
                         <div class='controls'>
                             {{ form.raw_data|add_css_class:'form-control' }}
-                            {{ form.b64_values }}
                             <span class='help-block'>{% for error in form.raw_data.errors %}{{ error }}{% endfor %}</span>
                         </div>
                 </div>
