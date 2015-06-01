@@ -12,8 +12,9 @@ def get_external_values(querydict):
 	formatted = u""
 	for k, v in querydict.items():
 		if k not in settings.POSTDATA_KEY_BLACKLIST:
-			formatted += u"{0}: {1}\n".format(k, v)
+			formatted += settings.POSTDATA_DATA_FORMAT.format({'key': k, 'value': v})
 	return formatted
+
 
 def add_nugget_to_event(request, event_id, redirect_object):
 		add_return = nuggets_views.new(request, event_id)

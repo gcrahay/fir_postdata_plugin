@@ -18,7 +18,7 @@ from fir_postdata.utils import get_external_values, add_nugget_to_event
 @login_required
 @user_passes_test(incidents_views.is_incident_handler)
 def postdata_landing(request):
-	if request.POST:
+	if request.method == 'POST':
 		form = LandingForm(request.POST)
 		if form.is_valid():
 			if not form.cleaned_data.get('new', False):
